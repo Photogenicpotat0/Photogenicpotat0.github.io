@@ -226,4 +226,17 @@
           let group = cosplay.querySelector("p:nth-child(2)").textContent.toLowerCase();
           let brand = cosplay.querySelector("p:nth-child(3)").textContent.toLowerCase();
 
-         
+          if (
+            (name.includes(searchValue) || group.includes(searchValue) || brand.includes(searchValue)) &&
+            (groupFilter === '' || group.includes(groupFilter)) &&
+            (brandFilter === '' || brand.includes(brandFilter))
+          ) {
+            cosplay.style.display = 'block';
+          } else {
+            cosplay.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
