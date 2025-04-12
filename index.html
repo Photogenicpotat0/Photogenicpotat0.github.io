@@ -1,422 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosplay Collection</title>
+    <style>
+      /* Neon Style */
+      body {
+        background-color: #121212;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        color: #00ff99;
+        text-shadow:
+          0 0 10px #00ff99,
+          0 0 20px #00ff99,
+          0 0 30px #00ff99;
+        margin-top: 20px;
+      }
+      #filters {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+      }
+      #filters select,
+      #filters input {
+        margin: 5px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #333;
+        border: 1px solid #00ff99;
+        color: white;
+        border-radius: 5px;
+      }
+      #cosplay-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+      .cosplay-card {
+        background-color: #222;
+        border: 1px solid #00ff99;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        transition: all 0.3s ease;
+      }
+      .cosplay-card:hover {
+        transform: scale(1.05);
+      }
+      img {
+        max-width: 100%;
+        border-radius: 5px;
+      }
+      .cosplay-card h3 {
+        color: #00ff99;
+        margin: 10px 0;
+      }
+      .cosplay-card p {
+        color: #cccccc;
+      }
+      .cosplay-card .info {
+        text-align: left;
+        margin-top: 10px;
+      }
+      .cosplay-card .info p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cosplay Collection</h1>
 
-<script>
-  const cosplays = [
-    {
-      name: "Aether",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume",
-      version: "In-Game",
-      size: "",
-      status: "Minor Repairs Needed",
-      cleanliness: "Washed",
-      materials_price: "~$70?",
-      labor: "Sewing, Patterning",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "Photoshoot",
-      consultation_required: "Yes",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Paimon",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Prop",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Venti",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "M (asian)",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Venti / Barbatos",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "Archon Venti",
-      size: "",
-      status: "Broken Wings",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Amber",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Handmade",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Kaeya",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Rex Lapis",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Xiao",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Xingqiu",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "M",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Chongyun",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "L",
-      status: "Mass Manufactured, flimsy printed fabric",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Kazuha",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "Syanne, August V for AX 2025",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Scaramouche",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Raiden Ei",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "L",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Gorou",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Xinyan",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Fischl",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Bennett",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume, Wig",
-      version: "In-Game",
-      size: "XL",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Storebought",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Yae Miko",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Accessories",
-      version: "Closet",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Tsumi NPC",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Mask",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "Handmade",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    },
-    {
-      name: "Wanderer",
-      franchise: "HoYoverse",
-      fandom: "Genshin Impact",
-      part: "Costume",
-      version: "In-Game",
-      size: "",
-      status: "",
-      cleanliness: "",
-      materials_price: "",
-      labor: "",
-      owner: "Llyona Fang",
-      possession: "Llyona Fang (Santa Barbara)",
-      approved_usage: "",
-      consultation_required: "",
-      rental_price: "",
-      waiting_list: "",
-      image: ""
-    }
-  ];
+    <!-- Filters Section -->
+    <div id="filters">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search Cosplays..."
+        onkeyup="filterCosplays()"
+      />
+      <select id="group-filter" onchange="filterCosplays()">
+        <option value="">Filter by Group</option>
+        <option value="group1">Group 1</option>
+        <option value="group2">Group 2</option>
+      </select>
+      <select id="brand-filter" onchange="filterCosplays()">
+        <option value="">Filter by Brand</option>
+        <option value="brand1">Brand 1</option>
+        <option value="brand2">Brand 2</option>
+      </select>
+    </div>
 
-  function displayCosplays(cosplays) {
-    const grid = document.getElementById("cosplay-grid");
-    grid.innerHTML = "";
-
-    cosplays.forEach(cosplay => {
-      const card = document.createElement("div");
-      card.classList.add("cosplay-card");
-
-      card.innerHTML = `
-        <img src="${cosplay.image}" alt="${cosplay.name}" />
-        <h3>${cosplay.name}</h3>
-        <p>Franchise: ${cosplay.franchise}</p>
-        <p>Fandom: ${cosplay.fandom}</p>
-        <p>Part: ${cosplay.part}</p>
-        <p>Version: ${cosplay.version}</p>
-        <p>Size: ${cosplay.size}</p>
-        <p>Status: ${cosplay.status}</p>
-        <p>Cleanliness: ${cosplay.cleanliness}</p>
+    <!-- Cosplay Grid -->
+    <div id="cosplay-grid">
+      <!-- Aether Card -->
+      <div class="cosplay-card">
+        <img src="aether-image.jpg" alt="Aether" />
+        <h3>Aether</h3>
+        <p>Franchise: HoYoverse</p>
+        <p>Fandom: Genshin Impact</p>
+        <p>Part: Costume</p>
+        <p>Version: In-Game</p>
+        <p>Size: (Not Provided)</p>
+        <p>Status: Handmade</p>
+        <p>Cleanliness: Minor Repairs Needed</p>
         <div class="info">
-          <p>Original Materials Price: ${cosplay.materials_price}</p>
-          <p>Labor: ${cosplay.labor}</p>
-          <p>Owner: ${cosplay.owner}</p>
-          <p>Possession: ${cosplay.possession}</p>
-          <p>Approved Usage: ${cosplay.approved_usage}</p>
-          <p>Consultation Required: ${cosplay.consultation_required}</p>
-          <p>Rental Price: ${cosplay.rental_price}</p>
-          <p>Waiting List: ${cosplay.waiting_list}</p>
+          <p>Original Materials Price: ~$70?</p>
+          <p>Labor: Sewing, Patterning</p>
+          <p>Owner: Llyona Fang</p>
+          <p>Possession: Llyona Fang (Santa Barbara)</p>
+          <p>Approved Usage: Photoshoot</p>
+          <p>Consultation Required: Yes</p>
+          <p>Rental Price: (Not Provided)</p>
+          <p>Waiting List: (Not Provided)</p>
         </div>
-      `;
-      grid.appendChild(card);
-    });
-  }
+      </div>
 
-  window.onload = function() {
-    displayCosplays(cosplays);
-  };
-</script>
+      <!-- Paimon Card -->
+      <div class="cosplay-card">
+        <img src="paimon-image.jpg" alt="Paimon" />
+        <h3>Paimon</h3>
+        <p>Franchise: HoYoverse</p>
+        <p>Fandom: Genshin Impact</p>
+        <p>Part: Prop</p>
+        <p>Version: In-Game</p>
+        <p>Size: (Not Provided)</p>
+        <p>Status: (Not Provided)</p>
+        <div class="info">
+          <p>Labor: (Not Provided)</p>
+          <p>Owner: Llyona Fang</p>
+          <p>Possession: Llyona Fang (Santa Barbara)</p>
+          <p>Approved Usage: (Not Provided)</p>
+          <p>Consultation Required: (Not Provided)</p>
+          <p>Rental Price: (Not Provided)</p>
+          <p>Waiting List: (Not Provided)</p>
+        </div>
+      </div>
+
+      <!-- Venti Card -->
+      <div class="cosplay-card">
+        <img src="venti-image.jpg" alt="Venti" />
+        <h3>Venti</h3>
+        <p>Franchise: HoYoverse</p>
+        <p>Fandom: Genshin Impact</p>
+        <p>Part: Costume, Wig</p>
+        <p>Version: In-Game</p>
+        <p>Size: M (asian)</p>
+        <p>Status: (Not Provided)</p>
+        <div class="info">
+          <p>Labor: (Not Provided)</p>
+          <p>Owner: Llyona Fang</p>
+          <p>Possession: Llyona Fang (Santa Barbara)</p>
+          <p>Approved Usage: (Not Provided)</p>
+          <p>Consultation Required: (Not Provided)</p>
+          <p>Rental Price: (Not Provided)</p>
+          <p>Waiting List: (Not Provided)</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script>
+      // Load CSV and parse it
+      function loadCSV() {
+        Papa.parse('cosplays.csv', {
+          download: true,
+          header: true,
+          dynamicTyping: true,
+          complete: function(result) {
+            displayCosplays(result.data);
+          }
+        });
+      }
+
+      // Display cosplays dynamically from the CSV
+      function displayCosplays(cosplays) {
+        const grid = document.getElementById("cosplay-grid");
+        grid.innerHTML = ''; // Clear the grid
+
+        cosplays.forEach(cosplay => {
+          const card = document.createElement("div");
+          card.classList.add("cosplay-card");
+
+          card.innerHTML = `
+            <img src="${cosplay.image || 'placeholder.jpg'}" alt="${cosplay.name || 'No name'}" />
+            <h3>${cosplay.name || 'Untitled Cosplay'}</h3>
+            <p>Franchise: ${cosplay.franchise || 'N/A'}</p>
+            <p>Fandom: ${cosplay.fandom || 'N/A'}</p>
+            <p>Part: ${cosplay.part || 'N/A'}</p>
+            <p>Version: ${cosplay.version || 'N/A'}</p>
+            <p>Size: ${cosplay.size || 'N/A'}</p>
+            <p>Status: ${cosplay.status || 'N/A'}</p>
+            <div class="info">
+              <p>Original Materials Price: ${cosplay.materials_price || 'N/A'}</p>
+              <p>Labor: ${cosplay.labor || 'N/A'}</p>
+              <p>Owner: ${cosplay.owner || 'N/A'}</p>
+              <p>Possession: ${cosplay.possession || 'N/A'}</p>
+              <p>Approved Usage: ${cosplay.approved_usage || 'N/A'}</p>
+              <p>Consultation Required: ${cosplay.consultation_required || 'N/A'}</p>
+              <p>Rental Price: ${cosplay.rental_price || 'N/A'}</p>
+              <p>Waiting List: ${cosplay.waiting_list || 'N/A'}</p>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      }
+
+      // Filter function for search and selects
+      function filterCosplays() {
+        let searchValue = document.getElementById("search").value.toLowerCase();
+        let groupFilter = document.getElementById("group-filter").value.toLowerCase();
+        let brandFilter = document.getElementById("brand-filter").value.toLowerCase();
+        let cosplays = document.querySelectorAll(".cosplay-card");
+
+        cosplays.forEach(cosplay => {
+          let name = cosplay.querySelector("h3").textContent.toLowerCase();
+          let group = cosplay.querySelector("p:nth-child(2)").textContent.toLowerCase();
+          let brand = cosplay.querySelector("p:nth-child(3)").textContent.toLowerCase();
+
+         
